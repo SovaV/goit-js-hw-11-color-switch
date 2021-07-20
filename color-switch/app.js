@@ -1,13 +1,14 @@
 const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
+let timeoutId = null;
 
 const refs = {
   startBtn: document.querySelector('[data-action="start"]'),
   stopBtn: document.querySelector('[data-action="stop"]'),
   body: document.querySelector("body"),
 };
-function changeColors() {
+function strChangeColors() {
   const colors = [
     "#FFFFFF",
     "#2196F3",
@@ -16,27 +17,22 @@ function changeColors() {
     "#009688",
     "#795548",
   ];
-  setInterval(function () {
-    // var bodybgarrayno = Math.floor(Math.random() * colors.length);
-    var selectedcolor = colors[randomIntegerFromInterval];
-    refs.body.style.backgroundColor = selectedcolor;
+  timeoutId = setInterval(function () {
+    const bodyBg = randomIntegerFromInterval(0, colors.length);
+    const selectedColor = colors[bodyBg];
+    refs.body.style.backgroundColor = selectedColor;
   }, 1000);
+  if (refs.startBtn) {
+    refs.startBtn.disabled = true;
+  }
 }
-refs.startBtn.addEventListener("click", changeColors);
 
-// function changeColors() {
-//   const colors = [
-//     "#FFFFFF",
-//     "#2196F3",
-//     "#4CAF50",
-//     "#FF9800",
-//     "#009688",
-//     "#795548",
-//   ];
-//   setInterval(function () {
-//     var bodybgarrayno = Math.floor(Math.random() * colors.length);
-//     var selectedcolor = colors[bodybgarrayno];
-//     refs.body.style.backgroundColor = selectedcolor;
-//   }, 1000);
-// }
-// refs.startBtn.addEventListener("click", changeColors);
+function stopChangeColors() {
+  refs.body.style = null;
+  clearTimeout(timeoutId);
+  if (refs.stopBtn) {
+    refs.startBtn.disabled = false;
+  }
+}
+refs.stopBtn.addEventListener("click", stopChangeColors);
+refs.startBtn.addEventListener("click", strChangeColors);
