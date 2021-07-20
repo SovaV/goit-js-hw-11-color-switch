@@ -19,8 +19,8 @@ function strChangeColors() {
   ];
   timeoutId = setInterval(function () {
     const bodyBg = randomIntegerFromInterval(0, colors.length);
-    const selectedColor = colors[bodyBg];
-    refs.body.style.backgroundColor = selectedColor;
+    // const selectedColor = colors[bodyBg];
+    refs.body.style.backgroundColor = colors[bodyBg];
   }, 1000);
   if (refs.startBtn) {
     refs.startBtn.disabled = true;
@@ -29,7 +29,7 @@ function strChangeColors() {
 
 function stopChangeColors() {
   refs.body.style = null;
-  clearTimeout(timeoutId);
+  clearInterval(timeoutId);
   if (refs.stopBtn) {
     refs.startBtn.disabled = false;
   }
