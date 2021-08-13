@@ -18,7 +18,7 @@ function strChangeColors() {
     "#795548",
   ];
   timeoutId = setInterval(function () {
-    const bodyBg = randomIntegerFromInterval(0, colors.length);
+    const bodyBg = randomIntegerFromInterval(0, colors.length - 1);
     // const selectedColor = colors[bodyBg];
     refs.body.style.backgroundColor = colors[bodyBg];
   }, 1000);
